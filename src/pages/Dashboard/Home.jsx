@@ -27,7 +27,6 @@ export default function Home() {
     loadData();
   }, [erro]);
 
-  console.log(erro);
   if (erro) {
     return <div>error</div>;
   }

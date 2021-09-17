@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/gamesList.css";
+import Games from "./Games";
 export default function GamesList({ games, error }) {
   return (
     <main className="gamesList">
@@ -21,15 +22,7 @@ export default function GamesList({ games, error }) {
         </div>
       </div>
       <div className="gamesList__games">
-        {games &&
-          games.map((game) => (
-            <img
-              key={game.id}
-              className="gamesList__games--img"
-              src={game.cover}
-              alt="capa do jogo"
-            />
-          ))}
+        {games && games.map((game) => <Games key={game.id} game={game} />)}
       </div>
     </main>
   );
