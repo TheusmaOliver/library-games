@@ -1,11 +1,10 @@
 import React from "react";
-import jogo1 from "../assets/images/bloodborne.jpeg";
 import "../styles/gamesList.css";
-export default function GamesList() {
+export default function GamesList({ games, error }) {
   return (
     <main className="gamesList">
       <div className="gamesList__header">
-        <h2 className="gamesList__title">All Games(65)</h2>
+        <h2 className="gamesList__title">All Games({games.length})</h2>
         <div className="gamesList__filters">
           <span className="gamesList__filters--span">Showing:</span>
           <select
@@ -22,18 +21,15 @@ export default function GamesList() {
         </div>
       </div>
       <div className="gamesList__games">
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
-        <img className="gamesList__games--img" src={jogo1} alt="jogo" />
+        {games &&
+          games.map((game) => (
+            <img
+              key={game.id}
+              className="gamesList__games--img"
+              src={game.cover}
+              alt="capa do jogo"
+            />
+          ))}
       </div>
     </main>
   );

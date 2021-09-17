@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import "../styles/dashboard.css";
+import Header from "../../components/Header";
+import Sidebar from "../../components/Sidebar";
+import "../../styles/dashboard.css";
 import Home from "./Home";
 import MyAccount from "./MyAccount";
 import MyLibrary from "./MyLibrary";

@@ -12,7 +12,7 @@ export default function Header() {
         <ul className="header__nav--list">
           {routesHeader &&
             routesHeader.map((route) => (
-              <NavLink to={route.path}>
+              <NavLink key={route.name} to={route.path}>
                 <li className="header__nav--list-item">{route.name}</li>
               </NavLink>
             ))}

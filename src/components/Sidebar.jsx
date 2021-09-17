@@ -12,7 +12,7 @@ export default function Sidebar() {
           <ul className="sidebar__nav--list">
             {routesSidebar &&
               routesSidebar.map((route) => (
-                <NavLink to={route.path}>
+                <NavLink key={route.name} to={route.path}>
                   <li className="sidebar__nav--list-item">{route.name}</li>
                 </NavLink>
               ))}
