@@ -1,32 +1,21 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { routesHeader } from "../utils/helpers";
 import loupe from "../assets/images/loupe.png";
 import profile from "../assets/images/profile.png";
 import "../styles/header.css";
+import { NavLink } from "react-router-dom";
+
 export default function Header() {
-  const router = useHistory();
   return (
     <header className="header">
       <nav className="header__nav">
         <ul className="header__nav--list">
-          <li
-            className="header__nav--list-item"
-            onClick={() => router.push("/")}
-          >
-            Home
-          </li>
-          <li
-            className="header__nav--list-item"
-            onClick={() => router.push("/news")}
-          >
-            News
-          </li>
-          <li
-            className="header__nav--list-item"
-            onClick={() => router.push("/settings")}
-          >
-            Settings
-          </li>
+          {routesHeader &&
+            routesHeader.map((route) => (
+              <NavLink to={route.path}>
+                <li className="header__nav--list-item">{route.name}</li>
+              </NavLink>
+            ))}
         </ul>
       </nav>
       <div className="header__search">

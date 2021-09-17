@@ -35,12 +35,11 @@
   cursor: pointer;
 }
 
-.sidebar__nav--list-item:hover,
-.sidebar__nav--list-item:active {
+.sidebar__nav--list-item:hover {
   background-color: #22253b;
 }
 
-.sidebar__nav--list-item:last-child {
+#add {
   margin-top: 3rem;
   color: #005c99;
 }
