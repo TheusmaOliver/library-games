@@ -6,12 +6,12 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebar__container">
         <img className="sidebar__img" src={logo} alt="logo" />
-        <nav className="sidebar__navbar">
-          <ul className="sidebar__navbar--list">
-            <li className="sidebar__navbar--list-item">My Account</li>
-            <li className="sidebar__navbar--list-item">All Games</li>
-            <li className="sidebar__navbar--list-item">My Library</li>
-            <li className="sidebar__navbar--list-item">+ Add Games</li>
+        <nav className="sidebar__nav">
+          <ul className="sidebar__nav--list">
+            <li className="sidebar__nav--list-item">My Account</li>
+            <li className="sidebar__nav--list-item">All Games</li>
+            <li className="sidebar__nav--list-item">My Library</li>
+            <li className="sidebar__nav--list-item">+ Add Games</li>
           </ul>
         </nav>
       </div>

@@ -18,14 +18,14 @@
   margin-bottom: 2rem;
 }
 
-.sidebar__navbar {
+.sidebar__nav {
   list-style: none;
   align-self: flex-start;
-  color: #acacac;
+  color: #fff;
   width: 90%;
 }
 
-.sidebar__navbar--list-item {
+.sidebar__nav--list-item {
   display: flex;
   align-items: center;
   padding-left: 1rem;
@@ -35,13 +35,12 @@
   cursor: pointer;
 }
 
-.sidebar__navbar--list-item:hover,
-.sidebar__navbar--list-item:active {
+.sidebar__nav--list-item:hover,
+.sidebar__nav--list-item:active {
   background-color: #22253b;
-  color: #ffffff;
 }
 
-.sidebar__navbar--list-item:last-child {
+.sidebar__nav--list-item:last-child {
   margin-top: 3rem;
   color: #005c99;
 }

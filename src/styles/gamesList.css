@@ -1,0 +1,31 @@
+.gamesList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.gamesList__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+.gamesList__filters--select {
+  margin-right: 1rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+}
+
+.gamesList__games {
+  display: grid;
+  grid-template-columns: repeat(6, 150px);
+  grid-gap: 1rem;
+  justify-items: center;
+  justify-content: center;
+}
+
+.gamesList__games--img {
+  max-width: 150px;
+}

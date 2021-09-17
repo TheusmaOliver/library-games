@@ -2,6 +2,13 @@
   width: 100%;
   display: flex;
 }
-header {
+.pages {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    101deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(12, 44, 62, 1) 0%,
+    rgba(12, 15, 36, 1) 17%
+  );
   flex: 10;
 }
