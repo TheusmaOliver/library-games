@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  imagemUrl String
+  name      String
+  surname   String
+  email     String    @unique
+  password  String
+  cpf       String
+  admin     Boolean   @default(false)
+  profiles  Profile[]
+}
+
+model Profile {
+  id        Int     @id @default(autoincrement())
+  title     String
+  imagemUrl String
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  games     Games[]
+}
+
+model Games {
+  id          Int       @id @default(autoincrement())
+  title       String
+  cover       String
+  description String
+  score       String
+  trailer     String
+  gameplay    String
+  year        Int
+  profiles    Profile[]
+  genrers     Genrer[]
+}
+
+model Genrer {
+  id    Int     @id @default(autoincrement())
+  name  String
+  games Games[]
+}
