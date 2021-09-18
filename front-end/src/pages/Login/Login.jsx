@@ -17,7 +17,7 @@ export default function Login() {
 
     const response = await api.buildApiPostRequest(api.loginUrl(), payload);
     const bodyResult = await response.json();
-    console.log(bodyResult);
+    console.log(bodyResult.accessToken);
   };
   return (
     <div className="login">
