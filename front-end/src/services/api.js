@@ -3,14 +3,27 @@ export const api = {
   baseUrl: "http://localhost:3001",
 
   // Endpoints
+
+  // GET
+  // Mostrar todos os jogos
   readAllGames: () => `${api.baseUrl}/games`,
+
+  // Mostrar todos os genêros
+  readAllGenrers: () => `${api.baseUrl}/genrer`,
+
+  // POST
+  // Cadastro
+  registerUrl: () => `${api.baseUrl}/users`,
 
   // Login
   loginUrl: () => `${api.baseUrl}/login`,
 
+  // Games
+  registerGames: () => `${api.baseUrl}/games`,
+
   // Requisições
 
-  // Get
+  // GET
   buildApiGetRequest: (url) =>
     fetch(url, {
       method: "GET",

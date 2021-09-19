@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import "../../styles/dashboard.css";
+import AddGames from "./AddGames";
 import Home from "./Home";
 import MyAccount from "./MyAccount";
 import MyLibrary from "./MyLibrary";
@@ -22,6 +23,7 @@ export default function Dashboard() {
             <Route path="/settings" exact component={Settings} />
             <Route path="/account" exact component={MyAccount} />
             <Route path="/library" exact component={MyLibrary} />
+            <Route path="/add-games" exact component={AddGames} />
           </Switch>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "../../assets/images/logo.png";
 import { api } from "../../services/api";
 import "../../styles/login.css";
-export default function Login() {
+export default function Login(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -17,7 +18,10 @@ export default function Login() {
 
     const response = await api.buildApiPostRequest(api.loginUrl(), payload);
     const bodyResult = await response.json();
-    console.log(bodyResult.accessToken);
+    localStorage.setItem("JWT", bodyResult.accessToken);
+    toast.success("Login efetuado com sucesso!");
+
+    props.history.push("/");
   };
   return (
     <div className="login">

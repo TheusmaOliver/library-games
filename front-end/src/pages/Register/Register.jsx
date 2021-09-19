@@ -1,23 +1,41 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { api } from "../../services/api";
 import "../../styles/register.css";
-export default function Register() {
+export default function Register(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const name = event.target.name.value;
+    const surname = event.target.surname.value;
+    const imagemUrl = event.target.imagemUrl.value;
+    const cpf = event.target.cpf.value;
 
     const payload = {
+      name,
+      surname,
+      imagemUrl,
+      cpf,
       email,
       password,
     };
 
-    const response = await api.buildApiPostRequest(api.loginUrl(), payload);
-    const bodyResult = await response.json();
-    console.log(bodyResult);
+    await api
+      .buildApiPostRequest(api.registerUrl(), payload)
+      .then((response) => {
+        if (response.status !== 201) {
+          throw new Error(response);
+        }
+        toast.success("Cadastro efetuado com sucesso!");
+        props.history.push("/login");
+      })
+      .catch(() => {
+        toast.error("Deu erro no cadastro");
+      });
   };
   return (
     <div className="register">

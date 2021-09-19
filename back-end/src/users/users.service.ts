@@ -4,7 +4,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 // Bcrypt
 import * as bcrypt from 'bcrypt';
-import { Prisma } from '.prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -38,23 +37,15 @@ export class UsersService {
       where: { id },
     });
   }
+
   findByEmail(email: string) {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    const profilesIds = updateUserDto.profilesIds;
-    delete updateUserDto.profilesIds;
-
-    const data: Prisma.UserUpdateInput = {
-      ...updateUserDto,
-      profiles: {
-        connect: profilesIds?.map((id) => ({ id })),
-      },
-    };
     return this.prisma.user.update({
       where: { id },
-      data,
+      data: updateUserDto,
     });
   }
 

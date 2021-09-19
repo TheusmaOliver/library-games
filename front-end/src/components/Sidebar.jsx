@@ -16,9 +16,11 @@ export default function Sidebar() {
                   <li className="sidebar__nav--list-item">{route.name}</li>
                 </NavLink>
               ))}
-            <li id="add" className="sidebar__nav--list-item">
-              + Add Games
-            </li>
+            <NavLink to="/add-games">
+              <li id="add" className="sidebar__nav--list-item">
+                + Add Games
+              </li>
+            </NavLink>
           </ul>
         </nav>
       </div>
