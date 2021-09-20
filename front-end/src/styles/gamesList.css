@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  color: #fff;
 }
 .gamesList__header {
   display: flex;
@@ -15,7 +14,11 @@
   background-color: transparent;
   border: none;
   outline: none;
-  color: #fff;
+  cursor: pointer;
+}
+
+.gamesList__filters--options {
+  background-color: var(--primary-color);
 }
 
 .gamesList__games {

@@ -8,8 +8,14 @@ export const api = {
   // Mostrar todos os jogos
   readAllGames: () => `${api.baseUrl}/games`,
 
-  // Mostrar todos os genêros
+  // Mostra os jogos a partir do id
+  readGamesById: (id) => `${api.baseUrl}/games/${id}`,
+
+  // Mostra todos os genêros
   readAllGenrers: () => `${api.baseUrl}/genrer`,
+
+  // Mostra os genêros a partir do id
+  readGenrersById: (id) => `${api.baseUrl}/genrer/${id}`,
 
   // POST
   // Cadastro

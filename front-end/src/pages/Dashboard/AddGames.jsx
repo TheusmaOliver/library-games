@@ -10,7 +10,7 @@ const initialValue = {
   score: "",
   trailer: "",
   gameplay: "",
-  genrers: "",
+  genrersIds: "",
 };
 
 export default function AddGames() {
@@ -46,7 +46,7 @@ export default function AddGames() {
     const payload = {
       ...values,
       year: +values.year,
-      genrers: [+values.genrers],
+      genrersIds: [+values.genrersIds],
     };
     console.log(payload);
     await api
@@ -150,10 +150,10 @@ export default function AddGames() {
         <div className="createGames__form--box">
           <label htmlFor="genrers">Genêro</label>
           <select
-            name="genrers"
+            name="genrersIds"
             onChange={onChange}
-            value={values.genrers}
-            id="genrers"
+            value={values.genrersIds}
+            id="genrersIds"
           >
             <option value="">Selecione uma opção</option>
             {genrer &&

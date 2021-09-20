@@ -1,5 +1,31 @@
+.game {
+  position: relative;
+  cursor: pointer;
+}
+
 .game-image {
   max-width: 150px;
   height: 160px;
   border-radius: 0.5rem;
+}
+
+.game-title {
+  position: absolute;
+  text-align: center;
+  background-color: #000000cc;
+  width: 100%;
+  padding: 0rem;
+  font-size: 0.8rem;
+  left: 0;
+  bottom: 2.2%;
+  border-radius: 0 0 0.5rem 0.5rem;
+  height: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+
+.game-title.active {
+  height: 50px;
+  padding: 0.5rem;
+  visibility: visible;
 }

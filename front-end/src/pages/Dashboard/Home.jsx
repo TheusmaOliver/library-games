@@ -1,14 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import GamesList from "../../components/GamesList";
+import Loading from "../../components/Loading";
 import { api } from "../../services/api";
 
 export default function Home() {
   const [games, setGames] = useState([]);
   const [erro, setErro] = useState(null);
+  const [genrers, setGenrers] = useState([]);
+  const [filter, setFilter] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [genrerName, setGenrerName] = useState("");
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
+    if (filter) {
+      setLoading(true);
+      await api
+        .buildApiGetRequest(api.readGenrersById(filter))
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(response.status);
+          }
+          return response.json();
+        })
+        .then((response) => {
+          setGames(response.games);
+          setGenrerName(response.name);
+        })
+        .catch((err) => {
+          setErro(err);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(true);
+      await api
+        .buildApiGetRequest(api.readAllGames())
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(response.status);
+          }
+          return response.json();
+        })
+        .then((response) => {
+          setGames(response);
+        })
+        .catch((err) => {
+          setErro(err);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [filter]);
+
+  const loadGenrer = async () => {
+    setLoading(true);
     await api
-      .buildApiGetRequest(api.readAllGames())
+      .buildApiGetRequest(api.readAllGenrers())
       .then((response) => {
         if (response.status !== 200) {
           throw new Error(response.status);
@@ -16,23 +61,33 @@ export default function Home() {
         return response.json();
       })
       .then((response) => {
-        setGames(response);
+        setGenrers(response);
       })
-      .catch(() => {
-        setErro("Unauthorized");
-      });
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
     loadData();
-  }, [erro]);
+    loadGenrer();
+  }, [loadData]);
 
   if (erro) {
     return <div>error</div>;
   }
   return (
     <div>
-      <GamesList games={games} error={erro} />
+      {loading && <Loading />}
+      <GamesList
+        games={games}
+        genrers={genrers}
+        setFilter={setFilter}
+        genrerName={genrerName}
+        setGenrerName={setGenrerName}
+        filter={filter}
+      />
     </div>
   );
 }

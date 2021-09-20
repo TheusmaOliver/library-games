@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import "../../styles/dashboard.css";
 import AddGames from "./AddGames";
+import GameInfo from "./GameInfo";
 import Home from "./Home";
 import MyAccount from "./MyAccount";
 import MyLibrary from "./MyLibrary";
@@ -20,6 +21,7 @@ export default function Dashboard() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/news" exact component={News} />
+            <Route path="/info/:id" exact component={GameInfo} />
             <Route path="/settings" exact component={Settings} />
             <Route path="/account" exact component={MyAccount} />
             <Route path="/library" exact component={MyLibrary} />

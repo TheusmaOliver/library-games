@@ -9,7 +9,6 @@
 
 .header__nav--list {
   display: flex;
-  color: #fff;
 }
 
 .header__nav--list-item {
@@ -40,7 +39,6 @@
   border: none;
   outline: none;
   max-width: 135px;
-  color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -57,5 +55,4 @@
   background-color: transparent;
   border: none;
   outline: none;
-  color: #fff;
 }
