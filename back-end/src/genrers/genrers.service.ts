@@ -27,6 +27,9 @@ export class GenrerService {
   findOne(id: number) {
     return this.prisma.genrer.findUnique({
       where: { id },
+      include: {
+        games: true,
+      },
     });
   }
 

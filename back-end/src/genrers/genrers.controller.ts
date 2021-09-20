@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { Public } from 'src/auth/public.decocator';
 import { CreateGenrerDto } from './dto/create-genrer.dto';
 import { UpdateGenrerDto } from './dto/update-genrer.dto';
 import { GenrerService } from './genrers.service';
@@ -20,11 +21,12 @@ export class GenrerController {
     return this.genrerService.create(createGenrerDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.genrerService.findAll();
   }
-
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.genrerService.findOne(+id);
