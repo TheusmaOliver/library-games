@@ -36,10 +36,6 @@ export default function GamesList({
                 </option>
               ))}
           </select>
-          <span className="gamesList__filters--span">Sort By:</span>
-          <select className="gamesList__filters--select" name="sort" id="sort">
-            <option value="favorites">Favorites</option>
-          </select>
         </div>
       </div>
       <div className="gamesList__games">

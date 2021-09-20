@@ -5,7 +5,7 @@ import profile from "../assets/images/profile.png";
 import "../styles/header.css";
 import { NavLink } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ auth }) {
   return (
     <header className="header">
       <nav className="header__nav">
@@ -27,14 +27,26 @@ export default function Header() {
         />
       </div>
       <div className="header__profile">
-        <img
-          className="header__profile--img"
-          src={profile}
-          alt="foto do perfil"
-        />
-        <select className="header__profile--select" name="profile" id="profile">
-          <option value="1">Nickname</option>
-        </select>
+        {auth ? (
+          <>
+            <img
+              className="header__profile--img"
+              src={profile}
+              alt="foto do perfil"
+            />
+            <select
+              className="header__profile--select"
+              name="profile"
+              id="profile"
+            >
+              <option value="1">Nickname</option>
+            </select>
+          </>
+        ) : (
+          <button className="header__profile--login">
+            <NavLink to="/login">login</NavLink>
+          </button>
+        )}
       </div>
     </header>
   );

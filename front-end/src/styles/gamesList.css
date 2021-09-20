@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
+  color: #fff;
 }
 .gamesList__filters--select {
   margin-right: 1rem;
@@ -15,10 +16,12 @@
   border: none;
   outline: none;
   cursor: pointer;
+  color: #fff;
 }
 
 .gamesList__filters--options {
   background-color: var(--primary-color);
+  color: #fff;
 }
 
 .gamesList__games {

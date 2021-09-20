@@ -47,8 +47,20 @@
   border: 1px solid rgb(14 144 243);
   background-color: transparent;
   margin-right: 0.5rem;
+  color: #fff;
+}
+
+.gameInfo__info--score {
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.gameInfo__info--score > svg {
+  color: yellow;
 }
 
 .gameInfo__info--description {
   margin-top: 1rem;
+  color: #fff;
 }

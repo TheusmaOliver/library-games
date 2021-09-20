@@ -4,11 +4,13 @@ import { useCallback } from "react";
 import Loading from "../../components/Loading";
 import { api } from "../../services/api";
 import "../../styles/gameInfo.css";
+import { AiFillStar } from "react-icons/ai";
 
 export default function GameInfo(props) {
   const id = props.match.params.id;
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const loadData = useCallback(async () => {
     setLoading(true);
     await api
@@ -54,7 +56,10 @@ export default function GameInfo(props) {
                 </li>
               ))}
             </ul>
-            <span>+ {info.score}/10</span>
+            <span className="gameInfo__info--score">
+              <AiFillStar />
+              {info.score}/10
+            </span>
             <p className="gameInfo__info--description">{info.description}</p>
           </div>
         </>

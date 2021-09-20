@@ -15,6 +15,7 @@
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   cursor: pointer;
+  color: #fff;
 }
 
 .header__nav--list-item:hover {
@@ -55,4 +56,23 @@
   background-color: transparent;
   border: none;
   outline: none;
+  color: #fff;
+}
+
+.header__profile--login {
+  width: 70px;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid rgb(14 144 243);
+  border-radius: 0.5rem;
+  height: 30px;
+  cursor: pointer;
+}
+.header__profile--login:hover,
+.header__profile--login:hover a {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+.header__profile--login a {
+  color: #fff;
 }

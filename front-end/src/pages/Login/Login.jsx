@@ -15,13 +15,22 @@ export default function Login(props) {
       email,
       password,
     };
-
-    const response = await api.buildApiPostRequest(api.loginUrl(), payload);
-    const bodyResult = await response.json();
-    localStorage.setItem("JWT", bodyResult.accessToken);
-    toast.success("Login efetuado com sucesso!");
-
-    props.history.push("/");
+    await api
+      .buildApiPostRequest(api.loginUrl(), payload)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((response) => {
+        localStorage.setItem("JWT", response.accessToken);
+        toast.success("Login efetuado com sucesso!");
+        props.history.push("/");
+      })
+      .catch(() => {
+        toast.error("Deu erro no login");
+      });
   };
   return (
     <div className="login">
