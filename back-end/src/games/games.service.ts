@@ -40,12 +40,15 @@ export class GamesService {
 
   update(id: number, updateGameDto: UpdateGameDto) {
     const genrersIds = updateGameDto.genrersIds;
+    const genrersDisconnectIds = updateGameDto.genrersDisconnectIds;
     delete updateGameDto.genrersIds;
+    delete updateGameDto.genrersDisconnectIds;
 
     const data = {
       ...updateGameDto,
       genrers: {
         connect: genrersIds?.map((id) => ({ id })),
+        disconnect: genrersDisconnectIds?.map((id) => ({ id })),
       },
     };
 
