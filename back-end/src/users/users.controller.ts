@@ -11,6 +11,8 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/auth/public.decocator';
+import { CurrentUser } from 'src/decocators/current-user.decorator';
+import { User } from './entities/user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -20,6 +22,12 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
+
+  @Get('currentUser')
+  findUser(@CurrentUser() user: User) {
+    return { user };
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();

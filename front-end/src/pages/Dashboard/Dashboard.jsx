@@ -23,7 +23,12 @@ export default function Dashboard() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/news" exact component={News} />
-            <Route path="/info/:id" exact component={GameInfo} />
+            <Route
+              path="/info/:id"
+              exact
+              component={GameInfo}
+              auth={isAuthenticated}
+            />
             <GuardedRoute
               path="/settings"
               exact

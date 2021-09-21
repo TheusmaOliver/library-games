@@ -5,11 +5,38 @@ import Loading from "../../components/Loading";
 import { api } from "../../services/api";
 import "../../styles/gameInfo.css";
 import { AiFillStar } from "react-icons/ai";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
+import { useParams } from "react-router";
 
-export default function GameInfo(props) {
-  const id = props.match.params.id;
+export default function GameInfo({ auth }) {
+  const { id } = useParams();
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState(false);
+  const [user, setUser] = useState([]);
+  console.log(auth);
+  const loadUser = async () => {
+    await api
+      .buildApiGetRequest(api.readCurrentUser(), true)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((response) => response.user)
+      .then((response) => {
+        setUser(response.profiles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    if (auth) {
+      loadUser();
+    }
+  }, [auth]);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -35,9 +62,12 @@ export default function GameInfo(props) {
       {loading && <Loading />}
       {info && (
         <>
-          <div className="gameInfo__favorite">
-            <button className="gameInfo__favorite--btn">Favoritar</button>
-          </div>
+          <span
+            className={`gameInfo__favorite ${active ? "active" : ""}`}
+            onClick={() => setActive(!active)}
+          >
+            {active ? <MdFavorite /> : <MdFavoriteBorder />}
+          </span>
           <div className="gameInfo__midia">
             <img src={info.cover} alt={info.title} />
             <iframe

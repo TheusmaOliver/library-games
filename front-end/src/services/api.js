@@ -5,6 +5,13 @@ export const api = {
   // Endpoints
 
   // GET
+
+  // Mostra o usuario atual
+  readCurrentUser: () => `${api.baseUrl}/users/currentUser`,
+
+  // Mostra o usuario de acordo com o id
+  readUserById: (id) => `${api.baseUrl}/users/${id}`,
+
   // Mostrar todos os jogos
   readAllGames: () => `${api.baseUrl}/games`,
 
@@ -27,12 +34,18 @@ export const api = {
   // Games
   registerGames: () => `${api.baseUrl}/games`,
 
+  // Auth Header
+  authHeader: {
+    Authorization: "Bearer " + localStorage.getItem("JWT"),
+  },
+
   // Requisições
 
   // GET
-  buildApiGetRequest: (url) =>
+  buildApiGetRequest: (url, auth) =>
     fetch(url, {
       method: "GET",
+      headers: auth ? new Headers({ ...api.authHeader }) : undefined,
     }),
 
   // Post

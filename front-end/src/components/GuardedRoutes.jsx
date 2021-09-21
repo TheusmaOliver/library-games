@@ -8,7 +8,7 @@ const GuardedRoute = ({ component: Component, auth, ...rest }) => (
     {...rest}
     render={(props) =>
       auth === true ? (
-        <Component {...props} />
+        <Component {...props} auth={auth} />
       ) : (
         <Redirect to="/">{toast.error("Você precisa estar logado")}</Redirect>
       )

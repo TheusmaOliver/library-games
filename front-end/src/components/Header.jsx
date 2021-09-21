@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { routesHeader } from "../utils/helpers";
 import loupe from "../assets/images/loupe.png";
-import profile from "../assets/images/profile.png";
 import "../styles/header.css";
 import { NavLink } from "react-router-dom";
+import { api } from "../services/api";
 
 export default function Header({ auth }) {
+  const [user, setUser] = useState([]);
+
+  const loadUser = async () => {
+    await api
+      .buildApiGetRequest(api.readCurrentUser(), true)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((response) => response.user)
+      .then((response) => {
+        setUser(response.profiles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    if (auth) {
+      loadUser();
+    }
+  }, [auth]);
   return (
     <header className="header">
       <nav className="header__nav">
@@ -26,26 +50,31 @@ export default function Header({ auth }) {
           placeholder="Search games titles"
         />
       </div>
-      <div className="header__profile">
+      <div>
         {auth ? (
           <>
-            <img
-              className="header__profile--img"
-              src={profile}
-              alt="foto do perfil"
-            />
-            <select
-              className="header__profile--select"
-              name="profile"
-              id="profile"
-            >
-              <option value="1">Nickname</option>
-            </select>
+            {user &&
+              user.map((profile) => (
+                <div className="header__profile" key={profile.id}>
+                  <img
+                    className="header__profile--img"
+                    src={profile.imagemUrl}
+                    alt="foto do perfil"
+                  />
+                  <select
+                    className="header__profile--select"
+                    name="profile"
+                    id="profile"
+                  >
+                    <option value="1">{profile.title}</option>
+                  </select>
+                </div>
+              ))}
           </>
         ) : (
-          <button className="header__profile--login">
-            <NavLink to="/login">login</NavLink>
-          </button>
+          <NavLink to="/login">
+            <button className="header__profile--login">login</button>
+          </NavLink>
         )}
       </div>
     </header>

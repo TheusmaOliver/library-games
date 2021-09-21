@@ -35,11 +35,19 @@ export class UsersService {
   findById(id: number) {
     return this.prisma.user.findUnique({
       where: { id },
+      include: {
+        profiles: true,
+      },
     });
   }
 
   findByEmail(email: string) {
-    return this.prisma.user.findUnique({ where: { email } });
+    return this.prisma.user.findUnique({
+      where: { email },
+      include: {
+        profiles: true,
+      },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

@@ -26,7 +26,7 @@ export default function Login(props) {
       .then((response) => {
         localStorage.setItem("JWT", response.accessToken);
         toast.success("Login efetuado com sucesso!");
-        props.history.push("/");
+        props.history.push("/profiles");
       })
       .catch(() => {
         toast.error("Deu erro no login");
