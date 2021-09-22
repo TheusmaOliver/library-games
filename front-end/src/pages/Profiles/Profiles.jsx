@@ -1,31 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import React from "react";
+import { useHistory } from "react-router";
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import "../../styles/profiles.css";
+import User from "../../hooks/User";
+import { api } from "../../services/api";
 
-export default function Profiles({ auth }) {
-  console.log("Profiles");
-  const [user, setUser] = useState([]);
-  console.log(user);
-  const loadUser = async () => {
+export default function Profiles(props) {
+  const { user } = User();
+
+  const saveProfile = async (id) => {
     await api
-      .buildApiGetRequest(api.readCurrentUser(), true)
+      .buildApiGetRequest(api.readProfileById(id), true)
+      .then((response) => response.json())
       .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((response) => response.user)
-      .then((response) => {
-        setUser(response);
-      })
-      .catch((err) => {
-        console.log(err);
+        localStorage.setItem("profile", JSON.stringify(response));
+        props.history.push("/");
       });
   };
-  console.log(auth);
-  useEffect(() => {
-    loadUser();
-  }, []);
-  return <div id="profiles">profiles</div>;
+  return (
+    <div id="profiles">
+      {user.profiles &&
+        user.profiles.length > 0 &&
+        user.profiles.map((profile) => (
+          <div className="profiles__info" key={profile.id}>
+            <h1 className="profiles__info--title">Profiles</h1>
+            <div className="profiles__info--box">
+              <img
+                onClick={() => saveProfile(profile.id)}
+                src={profile.imagemUrl}
+                alt="imagem de perfil"
+              />
+              <div className="profiles__info--box-actions">
+                <button id="edit">
+                  <MdModeEdit />
+                </button>
+                <button id="delete">
+                  <MdDelete />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+
+      <button>Create Profile</button>
+    </div>
+  );
 }

@@ -5,13 +5,12 @@ import "../styles/header.css";
 import { NavLink } from "react-router-dom";
 import User from "../hooks/User";
 
-export default function Header({ auth }) {
+export default function Header() {
+  const auth = Boolean(localStorage.getItem("JWT"));
   const { user } = User();
   useEffect(() => {
-    if (auth) {
-      return user;
-    }
-  }, [auth, user]);
+    return user;
+  }, [user]);
   return (
     <header className="header">
       <nav className="header__nav">

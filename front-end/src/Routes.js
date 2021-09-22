@@ -11,12 +11,7 @@ export default function Routes() {
 
   return (
     <Switch>
-      <GuardedRoute
-        path="/profiles"
-        exact
-        component={Profiles}
-        auth={isAuthenticated}
-      />
+      <GuardedRoute path="/profiles" exact component={Profiles} />
       <Route path="/login" exact component={Login} auth={isAuthenticated} />
       <Route path="/register" exact component={Register} />
       <Route path="/" component={Dashboard} auth={isAuthenticated} />

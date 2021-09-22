@@ -3,6 +3,7 @@ import { api } from "../services/api";
 
 export default function User() {
   const [user, setUser] = useState([]);
+  const auth = Boolean(localStorage.getItem("JWT"));
 
   const loadUser = async () => {
     await api
@@ -22,8 +23,10 @@ export default function User() {
       });
   };
   useEffect(() => {
-    loadUser();
-  }, []);
+    if (auth) {
+      loadUser();
+    }
+  }, [auth]);
   return {
     user,
   };

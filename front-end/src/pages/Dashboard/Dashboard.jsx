@@ -13,46 +13,20 @@ import News from "./News";
 import Settings from "./Settings";
 
 export default function Dashboard() {
-  const isAuthenticated = Boolean(localStorage.getItem("JWT"));
   return (
     <div>
       <div className="container">
         <Sidebar />
         <div className="pages">
-          <Header auth={isAuthenticated} />
+          <Header />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/news" exact component={News} />
-            <Route
-              path="/info/:id"
-              exact
-              component={GameInfo}
-              auth={isAuthenticated}
-            />
-            <GuardedRoute
-              path="/settings"
-              exact
-              component={Settings}
-              auth={isAuthenticated}
-            />
-            <GuardedRoute
-              path="/account"
-              exact
-              component={MyAccount}
-              auth={isAuthenticated}
-            />
-            <GuardedRoute
-              path="/library"
-              exact
-              component={MyLibrary}
-              auth={isAuthenticated}
-            />
-            <GuardedRoute
-              path="/add-games"
-              exact
-              component={AddGames}
-              auth={isAuthenticated}
-            />
+            <Route path="/info/:id" exact component={GameInfo} />
+            <GuardedRoute path="/settings" exact component={Settings} />
+            <GuardedRoute path="/account" exact component={MyAccount} />
+            <GuardedRoute path="/library" exact component={MyLibrary} />
+            <GuardedRoute path="/add-games" exact component={AddGames} />
           </Switch>
         </div>
       </div>

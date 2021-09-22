@@ -12,6 +12,9 @@ export const api = {
   // Mostra o usuario de acordo com o id
   readUserById: (id) => `${api.baseUrl}/users/${id}`,
 
+  // Mostra o profile de acordo com o id
+  readProfileById: (id) => `${api.baseUrl}/profiles/${id}`,
+
   // Mostrar todos os jogos
   readAllGames: () => `${api.baseUrl}/games`,
 
@@ -52,7 +55,10 @@ export const api = {
   buildApiPostRequest: (url, body) =>
     fetch(url, {
       method: "POST",
-      headers: new Headers({ "Content-Type": "application/json" }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("JWT"),
+      }),
       body: JSON.stringify(body),
     }),
 };

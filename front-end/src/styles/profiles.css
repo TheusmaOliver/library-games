@@ -1,5 +1,38 @@
 #profiles {
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: var(--primary-color);
+}
+
+.profiles__info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profiles__info--title {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.profiles__info--box {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.profiles__info--box > img {
+  width: 150px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.profiles__info--box-actions {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  cursor: pointer;
 }

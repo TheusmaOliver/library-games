@@ -8,8 +8,9 @@ import { AiFillStar } from "react-icons/ai";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { useParams } from "react-router";
 
-export default function GameInfo({ auth }) {
+export default function GameInfo() {
   const { id } = useParams();
+  const auth = Boolean(localStorage.getItem("JWT"));
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);

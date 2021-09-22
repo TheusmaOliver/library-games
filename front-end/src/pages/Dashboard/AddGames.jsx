@@ -16,6 +16,8 @@ const initialValue = {
 export default function AddGames() {
   const [values, setValues] = useState(initialValue);
   const [genrer, setGenrer] = useState([]);
+  const auth = Boolean(localStorage.getItem("JWT"));
+  console.log(auth);
 
   const loadGenrer = async () => {
     await api
@@ -57,7 +59,8 @@ export default function AddGames() {
         }
         toast.success("Jogo adicionado com sucesso!");
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         toast.error("Deu erro no cadastro do jogo");
       });
   };
