@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { routesHeader } from "../utils/helpers";
 import loupe from "../assets/images/loupe.png";
 import "../styles/header.css";
 import { NavLink } from "react-router-dom";
-import { api } from "../services/api";
+import User from "../hooks/User";
 
 export default function Header({ auth }) {
-  const [user, setUser] = useState([]);
-
-  const loadUser = async () => {
-    await api
-      .buildApiGetRequest(api.readCurrentUser(), true)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((response) => response.user)
-      .then((response) => {
-        setUser(response.profiles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const { user } = User();
   useEffect(() => {
     if (auth) {
-      loadUser();
+      return user;
     }
-  }, [auth]);
+  }, [auth, user]);
   return (
     <header className="header">
       <nav className="header__nav">
@@ -53,8 +35,8 @@ export default function Header({ auth }) {
       <div>
         {auth ? (
           <>
-            {user &&
-              user.map((profile) => (
+            {user.profiles &&
+              user.profiles.map((profile) => (
                 <div className="header__profile" key={profile.id}>
                   <img
                     className="header__profile--img"
