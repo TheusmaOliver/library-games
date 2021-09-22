@@ -35,9 +35,9 @@ export const api = {
   registerGames: () => `${api.baseUrl}/games`,
 
   // Auth Header
-  authHeader: {
+  authHeader: () => ({
     Authorization: "Bearer " + localStorage.getItem("JWT"),
-  },
+  }),
 
   // Requisições
 
@@ -45,7 +45,7 @@ export const api = {
   buildApiGetRequest: (url, auth) =>
     fetch(url, {
       method: "GET",
-      headers: auth ? new Headers({ ...api.authHeader }) : undefined,
+      headers: auth ? new Headers({ ...api.authHeader() }) : undefined,
     }),
 
   // Post

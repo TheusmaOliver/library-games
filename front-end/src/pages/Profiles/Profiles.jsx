@@ -3,8 +3,9 @@ import { api } from "../../services/api";
 import "../../styles/profiles.css";
 
 export default function Profiles({ auth }) {
+  console.log("Profiles");
   const [user, setUser] = useState([]);
-
+  console.log(user);
   const loadUser = async () => {
     await api
       .buildApiGetRequest(api.readCurrentUser(), true)
@@ -16,7 +17,7 @@ export default function Profiles({ auth }) {
       })
       .then((response) => response.user)
       .then((response) => {
-        setUser(response.profiles);
+        setUser(response);
       })
       .catch((err) => {
         console.log(err);
@@ -24,9 +25,7 @@ export default function Profiles({ auth }) {
   };
   console.log(auth);
   useEffect(() => {
-    if (auth) {
-      loadUser();
-    }
-  }, [auth]);
+    loadUser();
+  }, []);
   return <div id="profiles">profiles</div>;
 }

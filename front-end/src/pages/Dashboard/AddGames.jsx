@@ -126,7 +126,7 @@ export default function AddGames() {
         <div className="createGames__form--box">
           <label htmlFor="trailer">Trailer</label>
           <input
-            type="url"
+            type="text"
             required
             name="trailer"
             value={values.trailer}
@@ -138,7 +138,7 @@ export default function AddGames() {
         <div className="createGames__form--box">
           <label htmlFor="gameplay">Gameplay</label>
           <input
-            type="url"
+            type="text"
             required
             name="gameplay"
             value={values.gameplay}
