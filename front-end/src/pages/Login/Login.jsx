@@ -15,6 +15,7 @@ export default function Login(props) {
       email,
       password,
     };
+    console.log(payload);
     await api
       .buildApiPostRequest(api.loginUrl(), payload)
       .then((response) => {

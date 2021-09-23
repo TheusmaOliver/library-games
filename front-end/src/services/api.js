@@ -12,6 +12,8 @@ export const api = {
   // Mostra o usuario de acordo com o id
   readUserById: (id) => `${api.baseUrl}/users/${id}`,
 
+  // Motra todos os profiles
+
   // Mostra o profile de acordo com o id
   readProfileById: (id) => `${api.baseUrl}/profiles/${id}`,
 
@@ -55,6 +57,16 @@ export const api = {
   buildApiPostRequest: (url, body) =>
     fetch(url, {
       method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify(body),
+    }),
+
+  // Patch
+  buildApiPatchRequest: (url, body) =>
+    fetch(url, {
+      method: "PATCH",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("JWT"),

@@ -7,42 +7,19 @@ import "../../styles/gameInfo.css";
 import { AiFillStar } from "react-icons/ai";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 export default function GameInfo() {
   const { id } = useParams();
-  const auth = Boolean(localStorage.getItem("JWT"));
+  const profile = JSON.parse(localStorage.getItem("profile"));
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
-  const [user, setUser] = useState([]);
-  console.log(auth);
-  const loadUser = async () => {
-    await api
-      .buildApiGetRequest(api.readCurrentUser(), true)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((response) => response.user)
-      .then((response) => {
-        setUser(response.profiles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    if (auth) {
-      loadUser();
-    }
-  }, [auth]);
-
+  console.log(profile);
   const loadData = useCallback(async () => {
     setLoading(true);
     await api
-      .buildApiGetRequest(api.readGamesById(id))
+      .buildApiGetRequest(api.readGamesById(id), true)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error(response.status);
@@ -58,6 +35,30 @@ export default function GameInfo() {
       .finally(() => setLoading(false));
   }, [id]);
   useEffect(() => loadData(), [loadData]);
+
+  const handleFavorite = async () => {
+    if (profile) {
+      const id = profile.id;
+      const payload = {
+        gamesIds: [info.id],
+      };
+      console.log(payload);
+      await api
+        .buildApiPatchRequest(api.readProfileById(id), payload)
+        .then((response) => {
+          console.log(response);
+          if (response.status !== 200) {
+            throw new Error(response.status);
+          }
+          setActive(!active);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      toast.error("Você precisa estar logado");
+    }
+  };
   return (
     <div className="gameInfo">
       {loading && <Loading />}
@@ -65,7 +66,7 @@ export default function GameInfo() {
         <>
           <span
             className={`gameInfo__favorite ${active ? "active" : ""}`}
-            onClick={() => setActive(!active)}
+            onClick={handleFavorite}
           >
             {active ? <MdFavorite /> : <MdFavoriteBorder />}
           </span>

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import User from "../hooks/User";
 export default function Sidebar() {
   const { user } = User();
+  const auth = Boolean(localStorage.getItem("JWT"));
 
   return (
     <div className="sidebar">
@@ -19,7 +20,7 @@ export default function Sidebar() {
                   <li className="sidebar__nav--list-item">{route.name}</li>
                 </NavLink>
               ))}
-            {user.admin && (
+            {auth && user.admin && (
               <NavLink to="/add-games">
                 <li id="add" className="sidebar__nav--list-item">
                   + Add Games

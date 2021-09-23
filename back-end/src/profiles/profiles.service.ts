@@ -41,9 +41,19 @@ export class ProfilesService {
   }
 
   update(id: number, updateProfileDto: UpdateProfileDto) {
+    const gamesIds = updateProfileDto.gamesIds;
+
+    delete updateProfileDto.gamesIds;
+
+    const data: Prisma.ProfileUpdateInput = {
+      ...updateProfileDto,
+      games: {
+        connect: gamesIds?.map((id) => ({ id })),
+      },
+    };
     return this.prisma.profile.update({
       where: { id },
-      data: updateProfileDto,
+      data,
     });
   }
 

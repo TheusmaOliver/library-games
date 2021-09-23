@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import "../../styles/profiles.css";
 import User from "../../hooks/User";
